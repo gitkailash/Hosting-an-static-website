@@ -10,6 +10,12 @@ This guide will help you host a secure, scalable static website on AWS using S3,
 - A registered domain (e.g., `abc.com`)
 - Basic understanding of AWS services
 
+## Architecture Diagram
+
+![Architecture Diagram](https://d1tcczg8b21j1t.cloudfront.net/strapi-assets/s3_diagram_cloudfront_acm_route53_c2a411d6a4.png)
+
+---
+
 ## Steps
 
 ### 1. Set Up S3 Bucket for Static Website Hosting
