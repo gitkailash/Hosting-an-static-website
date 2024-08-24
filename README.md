@@ -12,7 +12,7 @@ This guide will help you host a secure, scalable static website on AWS using S3,
 
 ## Architecture Diagram
 
-![Architecture Diagram](https://d1tcczg8b21j1t.cloudfront.net/strapi-assets/s3_diagram_cloudfront_acm_route53_c2a411d6a4.png)
+![Architecture Diagram](https://github.com/gitkailash/Hosting-an-static-website/blob/main/s3-pipeline.jpg)
 
 ---
 
