@@ -1,6 +1,6 @@
 # Hosting-an-static-website
 
-This guide will help you host a secure, scalable static website on AWS using S3, ACM, CloudFront, and Route 53. Follow these steps to get your website up and running with a custom domain and SSL/TLS encryption.
+This guide will help you host a secure, scalable static website on AWS using S3, ACM, CloudFront, Route 53 and CodePipeline. Follow these steps to get your website up and running with a custom domain and SSL/TLS encryption.
 
 ---
 
@@ -143,7 +143,47 @@ This guide will help you host a secure, scalable static website on AWS using S3,
      - **Name**: `*.abc.com`
      - **Value**: Your CloudFront distribution domain name (e.g., `dxxxxxx.cloudfront.net`).
 
-### 6. Test Your Setup
+### 6. Create an IAM Role for CodePipeline
+1. **Go to the IAM console**:
+   - Navigate to the IAM console in AWS.
+2. **Create a new role**:
+   - Click on "Roles" and then "Create role."
+   - Select "CodePipeline" as the trusted entity.
+   - Attach the policies: `AmazonS3FullAccess`, `AWSCodePipelineFullAccess`, and `AWSCodeBuildAdminAccess`.
+   - Give your role a name and create the role.
+
+### 7. Create a CodePipeline
+1. **Go to the CodePipeline console**: 
+   - Navigate to the CodePipeline console in AWS.
+2. **Create a new pipeline**:
+   - Click on "Create pipeline."
+   - Provide a pipeline name.
+   - Choose the service role created earlier.
+   - Click "Next."
+3. **Add a Source Stage**:
+   - Select "GitHub" as the source provider.
+   - Connect to your GitHub account and select the repository and branch for your static website.
+   - Enable "Detect changes" to trigger the pipeline on code changes.
+4. **Add a Build Stage**:
+   - Click Skip Build Stage. We don't required to build the static website.
+   - Click "Continue to CodePipeline."
+
+5. **Add a Deploy Stage**:
+   - Select "Amazon S3" as the deploy provider.
+   - Choose the S3 bucket created in Step 1.
+   - Leave the file name blank to deploy the entire build output.
+
+6. **Review and Create**:
+   - Review all the stages and settings.
+   - Click "Create pipeline."
+
+### 8. Trigger the Pipeline
+1. **Push changes to GitHub**:
+   - Any changes pushed to the selected branch in GitHub will trigger the pipeline.
+2. **Monitor the pipeline**:
+   - You can monitor the progress of the pipeline in the CodePipeline console.
+
+### 9. Test Your Setup
 
 1. **Access Your Website**:
    - Visit `https://abc.com` and `https://www.abc.com` to verify that your website is accessible over HTTPS.
